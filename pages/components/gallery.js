@@ -23,20 +23,20 @@ const Gallery = () => {
     /* gets the data from api using axios */
     const fetchImages = () => {
         setModal(false);
-        const api = 'https://api.unsplash.com';
+        const api = 'http://localhost:5068/api/Image';
 
         axios
-            .get(api + "/photos/?client_id=L6q1dYLzb-AyWQqCAzusi7nSm9ajyQuUshuw9z6X9cE")
+            .get(api)
             /* waits a second just so you can see the loader, the timeout won't exist in a real project */
-            .then(res => setTimeout(() => setPhotos([...photos, ...res.data]), 1000));
+            .then(res => setTimeout(() => setPhotos([...photos, ...res.data]), 100));
 
     }
 
     /* sets the photo that will be shown when clicked */
     const photoDetail = (item) => {
-        setTempPhotoUrl(item.urls.small);
+        setTempPhotoUrl(item.imageUrl);
         setModal(true);
-        setTempPhotoTagline("by " + item.user.name);
+        setTempPhotoTagline("by " + item.creatorName);
     };
 
     /* closes the modal on click to the close button */
@@ -60,7 +60,7 @@ const Gallery = () => {
             <div className="gallery">
                 {photos.map((item, index) => {
                     return (<div className="photoItems" onClick={() => photoDetail(item)} key={index}>
-                        <img src={item.urls.regular} style={{width: '100%'}} alt={item.tagline}/>
+                        <img src={item.imageUrl} style={{width: '100%'}} alt={item.tagline}/>
                     </div>)
                 })}
             </div>
