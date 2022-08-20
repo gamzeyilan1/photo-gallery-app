@@ -6,44 +6,46 @@ import Loader from "./loader";
 
 const Gallery = () => {
 
-    /* all photos */
+    /* All photos */
     const [photos, setPhotos] = useState([]);
-    /* modal isVisible */
+    /* Modal isVisible */
     const [modal, setModal] = useState(false);
-    /* clicked image */
+    /* Clicked image */
     const [tempPhotoUrl, setTempPhotoUrl] = useState('');
-    /* clicked image's tag */
+    /* Clicked image's tag */
     const [tempPhotoTagline, setTempPhotoTagline] = useState('');
 
-    /* calls the fetchImages method the first time the page is loaded */
+    /* Calls the fetchImages method the first time the page is loaded */
     useEffect(() => {
         fetchImages();
     }, []);
 
-    /* gets the data from api using axios */
+    /* Gets the data from api using axios */
     const fetchImages = () => {
         setModal(false);
         const api = 'http://localhost:5068/api/Image';
 
         axios
             .get(api)
-            /* waits a second just so you can see the loader, the timeout won't exist in a real project */
+            /* Waits a second just so you can see the loader, the timeout won't exist in a real project */
             .then(res => setTimeout(() => setPhotos([...photos, ...res.data]), 100));
 
     }
 
-    /* sets the photo that will be shown when clicked */
+    /* Sets the photo that will be shown when clicked */
     const photoDetail = (item) => {
         setTempPhotoUrl(item.imageUrl);
         setModal(true);
         setTempPhotoTagline("by " + item.creatorName);
     };
 
-    /* closes the modal on click to the close button */
+    /* Closes the modal on click to the close button */
     const closeClick = () => {
         setModal(false);
     }
 
+    /* Returns the photos and on click, shows the clicked photo with detail. Shows photos
+    on an infinite scroll, loads more on scroll. Shows the loader as it fetches image data on scroll. */
     return (
         <div>
         <div className={modal ? "modal open" : "modal"}>

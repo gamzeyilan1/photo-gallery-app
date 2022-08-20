@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace PhotosApi.Models
 {
+    /* DbContext to acknowledge and return the db model */
     public class ImageDbContext: DbContext
     {
 
@@ -23,7 +24,7 @@ namespace PhotosApi.Models
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             optionsBuilder.UseSqlServer(connectionString);
         }
-        
+         /* The project has only one model, ImageModel, and returns a bunch of ImageModels with: */
         public DbSet<ImageModel> ImageModels { get; set; }
     }
 }

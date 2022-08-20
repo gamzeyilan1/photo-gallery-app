@@ -80,6 +80,8 @@ a {
     border: 1px solid black;
     margin: 1%;
 }
+
+/* Loader animation below */
 .loader{
     text-align: center;
 }

@@ -5,7 +5,7 @@ import Gallery from './components/gallery';
 
 export default function Home() {
 
-    /* this section holds the general structure and calls the gallery class */
+    /* This section holds the general structure and calls the gallery component */
     let url = "https://www.linkedin.com/in/gamzeyilan";
     useEffect(() => {
         document.title = "TechGuilds Gallery App"

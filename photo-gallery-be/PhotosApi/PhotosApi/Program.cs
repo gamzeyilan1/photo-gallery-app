@@ -3,7 +3,7 @@ using PhotosApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Cors allow
+/* Allows CORS */
 builder.Services.AddCors(o => o.AddPolicy("LowCorsPolicy", builder =>
                              {
                                  builder.AllowAnyOrigin()
@@ -13,18 +13,17 @@ builder.Services.AddCors(o => o.AddPolicy("LowCorsPolicy", builder =>
 
 
 
-// Add services to the container.
-
+/* Adds services */
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/* Connects to the local DB using the Connection String defined on appsettings.json */
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ImageDbContext>(x => x.UseSqlServer(connectionString));
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+/* Configures the HTTP request pipeline. */
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -32,7 +31,6 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors("LowCorsPolicy");
 app.UseHttpsRedirection();
-
 
 app.UseAuthorization();
 

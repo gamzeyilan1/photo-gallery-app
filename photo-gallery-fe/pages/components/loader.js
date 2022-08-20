@@ -1,5 +1,6 @@
 import React from 'react';
 
+/* Loader animation for when waiting to load images. See global.css for the details. */
  const Loader = () => {
     return (
         <div className={"loader"}>
@@ -11,6 +12,5 @@ import React from 'react';
         </div>
     )
 }
-
 
 export default Loader;
